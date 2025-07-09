@@ -1,9 +1,65 @@
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+<!--<head>-->
+<!--  <meta charset="UTF-8">-->
+<!--  <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--  <link rel="stylesheet" href="styles.css">-->
+<!--  <title>Duck Quest</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--  <div>-->
+<!--    -->
+<!--  </div>-->
+<!--</body>-->
+<!--</html>-->
+
 <!DOCTYPE html>
-<html>
-  <body>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Лоадер с уточкой</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #87CEEB; /* Небо */
+      margin: 0;
+      overflow: hidden; /* Скрыть прокрутку */
+    }
 
-    <h1>My First Heading</h1>
-  <p>My first paragraph.</p>
+    .loader {
+      position: relative;
+      width: 100px;
+      height: 100px;
+    }
 
-  </body>
+    .duck {
+      position: absolute;
+      width: 200px; /* Ширина уточки */
+      height: 160px; /* Высота уточки */
+      background-image: url('/images/duck-right.png'); /* Путь к изображению уточки */
+      background-size: cover; /* Заполнение блока изображением */
+      animation: swim 3s linear infinite;
+      transform: scale(1, -1);
+      transform: rotate(180deg);
+    }
+
+    @keyframes swim {
+      0% {
+        transform: translateX(-100px);
+      }
+      100% {
+        transform: translateX(100vw);
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="loader">
+  <div class="duck"></div>
+</div>
+</body>
 </html>
