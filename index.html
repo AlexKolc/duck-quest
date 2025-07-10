@@ -5,10 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="loader.css">
-    <link rel="stylesheet" href="message-bubble.css">
-    <link rel="stylesheet" href="authorization.css">
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="styles/loader.css">
+    <link rel="stylesheet" href="styles/message-bubble.css">
+    <link rel="stylesheet" href="styles/authorization.css">
+    <link rel="stylesheet" href="styles/progress-bar.css">
+    <link rel="stylesheet" href="styles/duck-grid.css">
+    <link rel="stylesheet" href="styles/answers.css">
+    <link rel="stylesheet" href="styles/modal-content.css">
     <title>Duck Quest</title>
 </head>
 <body>
@@ -36,65 +40,41 @@
         </div>
     </div>
 
-
     <div class="next-message-container" style="display: none">
         <button id="next-message"></button>
     </div>
 </div>
 
+<div class="game-container" style="display: none">
+    <div id="modal-overlay">
+        <div id="modal-content">
+        </div>
+    </div>
+
+    <div class="progress-wrapper">
+        <div class="progress-container">
+            <div class="progress-bar"></div>
+            <div class="duck"></div>
+        </div>
+    </div>
+
+    <div class="answer-container">
+        <input type="text" id="answer-input" placeholder="Введите ответ">
+    </div>
+
+    <div class="button-row">
+        <button id="btn1" class="styled-button">Подарок 1</button>
+        <button id="btn2" class="styled-button">Подарок 2</button>
+        <button id="btn3" class="styled-button">Подарок 3</button>
+    </div>
+
+    <h3 style="text-align: center; margin-bottom: 0">Найденные уточки</h3>
+    <div class="duck-grid-container">
+        <div class="duck-grid"></div>
+    </div>
+
+</div>
+
 <script src="client.js"></script>
-<!--<script src="server.js"></script>-->
 </body>
 </html>
-
-<!--<!DOCTYPE html>-->
-<!--<html lang="ru">-->
-<!--<head>-->
-<!--  <meta charset="UTF-8">-->
-<!--  <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
-<!--  <title>Лоадер с уточкой</title>-->
-<!--  <style>-->
-<!--    body {-->
-<!--      display: flex;-->
-<!--      justify-content: center;-->
-<!--      align-items: center;-->
-<!--      height: 100vh;-->
-<!--      background-color: #87CEEB; /* Небо */-->
-<!--      margin: 0;-->
-<!--      overflow: hidden; /* Скрыть прокрутку */-->
-<!--    }-->
-
-<!--    .loader {-->
-<!--      position: relative;-->
-<!--      width: 100px;-->
-<!--      height: 100px;-->
-<!--    }-->
-
-<!--    .duck {-->
-<!--      position: absolute;-->
-<!--      width: 200px; /* Ширина уточки */-->
-<!--      height: 160px; /* Высота уточки */-->
-<!--      left: -50vw;-->
-<!--      background-image: url('images/duck-right.png'); /* Путь к изображению уточки */-->
-<!--      background-size: cover; /* Заполнение блока изображением */-->
-<!--      animation: swim 3s linear infinite;-->
-<!--      transform: scale(1, -1);-->
-<!--      transform: rotate(180deg);-->
-<!--    }-->
-
-<!--    @keyframes swim {-->
-<!--      0% {-->
-<!--        transform: translateX(-100px);-->
-<!--      }-->
-<!--      100% {-->
-<!--        transform: translateX(100vw);-->
-<!--      }-->
-<!--    }-->
-<!--  </style>-->
-<!--</head>-->
-<!--<body>-->
-<!--<div class="loader">-->
-<!--  <div class="duck"></div>-->
-<!--</div>-->
-<!--</body>-->
-<!--</html>-->
