@@ -1,0 +1,39 @@
+.loader-container {
+    position: fixed; /* Фиксируем относительно окна браузера */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #87CEEB; /* Небо */
+    margin: 0;
+    overflow: hidden;
+    z-index: 9999; /* Чтобы быть поверх всех элементов */
+}
+
+.loader {
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+
+.loader-duck {
+    position: absolute;
+    width: 200px; /* Ширина уточки */
+    height: 160px; /* Высота уточки */
+    left: -50vw;
+    background-image: url('../images/duck-right.png'); /* Путь к изображению уточки */
+    background-size: cover; /* Заполнение блока изображением */
+    animation: swim 3s linear infinite;
+}
+
+@keyframes swim {
+    0% {
+        transform: translateX(-100px);
+    }
+    100% {
+        transform: translateX(100vw);
+    }
+}
