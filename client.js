@@ -556,9 +556,23 @@ let shuffle = (array) => {
 
 let showModal = async (message, audioPath, duration = 3000) => {
     const $overlay = $('#modal-overlay');
-    $('#modal-content').html(message);
+    const $content = $('#modal-content');
 
-    $overlay.addClass('show');
+    $content.html(message);
+
+    // Ждем загрузки всех изображений внутри модалки
+    const images = $content.find('img').toArray();
+    await Promise.all(images.map(img => {
+        return new Promise((resolve) => {
+            if (img.complete) {
+                resolve();
+            } else {
+                $(img).on('load error', resolve);
+            }
+        });
+    }));
+
+    $overlay.addClass('show'); // Показываем после загрузки картинки
 
     let audio;
     if (audioPath) {
@@ -566,11 +580,7 @@ let showModal = async (message, audioPath, duration = 3000) => {
         await audio.play();
     }
 
-
     setTimeout(() => {
         $overlay.removeClass('show');
-        // if (audioPath) {
-        //     audio.stop();
-        // }
     }, duration);
-}
+};
