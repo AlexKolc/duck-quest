@@ -274,11 +274,11 @@ let startGame = () => {
                 $('#answer-input').val('')
 
                 if (value === "") {
-                    waitToHideLoader(1).then(() => {
+                    // waitToHideLoader(1).then(() => {
                         showModal("<p>Значение не может быть пустым!</p>", 'sounds/error.mp3').then(() => {
                             $('#answer-input').prop('disabled', false);
                         });
-                    });
+                    // });
                 } else if (Number.isInteger(Number(value))) {
                     checkDuckNumber(value).then((status) => {
                         let message = undefined;
@@ -317,7 +317,7 @@ let startGame = () => {
                                 }
                             }
 
-                            waitToHideLoader(1).then(() => {
+                            // waitToHideLoader(1).then(() => {
                                 showModal(message, sound).then(() => {
                                     if (status.status === STATUS.SUCCESS) {
                                         updateProgressBar();
@@ -326,11 +326,11 @@ let startGame = () => {
                                 }).then(() => {
                                     $('#answer-input').prop('disabled', false);
                                 });
-                            });
+                            // });
                         } else if (status.status === STATUS.ALREADY_FOUND) {
                             message = "<p>Упс, эту уточку ты уже находил..</p>";
                             sound = 'sounds/error.mp3';
-                            waitToHideLoader(1).then(() => {
+                            // waitToHideLoader(1).then(() => {
                                 showModal(message, sound).then(() => {
                                     if (status.status === STATUS.SUCCESS) {
                                         updateProgressBar();
@@ -339,11 +339,11 @@ let startGame = () => {
                                 }).then(() => {
                                     $('#answer-input').prop('disabled', false);
                                 });
-                            });
+                            // });
                         } else if (status.status === STATUS.INCORRECT_VALUE) {
                             message = "<p>Некорректное значение! Проверь номер!</p>";
                             sound = 'sounds/error.mp3';
-                            waitToHideLoader(1).then(() => {
+                            // waitToHideLoader(1).then(() => {
                                 showModal(message, sound).then(() => {
                                     if (status.status === STATUS.SUCCESS) {
                                         updateProgressBar();
@@ -352,11 +352,11 @@ let startGame = () => {
                                 }).then(() => {
                                     $('#answer-input').prop('disabled', false);
                                 });
-                            });
+                            // });
                         } else if (status.status === STATUS.NOT_SAVED) {
                             message = "Не удалось сохранить, попробуй еще раз!"
                             sound = 'sounds/error.mp3';
-                            waitToHideLoader(1).then(() => {
+                            // waitToHideLoader(1).then(() => {
                                 showModal(message, sound).then(() => {
                                     if (status.status === STATUS.SUCCESS) {
                                         updateProgressBar();
@@ -365,20 +365,20 @@ let startGame = () => {
                                 }).then(() => {
                                     $('#answer-input').prop('disabled', false);
                                 });
-                            });
+                            // });
                         }
                     });
                 } else if (value.toLowerCase() === 'подсказка' || value === '?') {
                     getHelpText().then(msg => {
-                        waitToHideLoader(1).then(() => {
-                            showModal(msg, 'sounds/help.mp3', 5000);
+                        // waitToHideLoader(1).then(() => {
+                            showModal(msg, 'sounds/help.mp3', 5000).then(() => {
                         }).then(() => {
                             $('#answer-input').prop('disabled', false);
                         });
                     })
                 } else {
-                    waitToHideLoader(1).then(() => {
-                        showModal("<p>Это какое-то некорректное значение!!!</p>", 'sounds/error.mp3');
+                    // waitToHideLoader(1).then(() => {
+                        showModal("<p>Это какое-то некорректное значение!!!</p>", 'sounds/error.mp3').then(() => {
                     }).then(() => {
                         $('#answer-input').prop('disabled', false);
                     });
@@ -570,17 +570,19 @@ let showModal = async (message, audioPath, duration = 3000) => {
                 $(img).on('load error', resolve);
             }
         });
-    }));
+    })).then(async () => {
+        await waitToHideLoader(1).then(async () => {
+            $overlay.addClass('show'); // Показываем после загрузки картинки
 
-    $overlay.addClass('show'); // Показываем после загрузки картинки
+            let audio;
+            if (audioPath) {
+                audio = new Audio(audioPath);
+                await audio.play();
+            }
 
-    let audio;
-    if (audioPath) {
-        audio = new Audio(audioPath);
-        await audio.play();
-    }
-
-    setTimeout(() => {
-        $overlay.removeClass('show');
-    }, duration);
+            setTimeout(() => {
+                $overlay.removeClass('show');
+            }, duration);
+        });
+    });
 };
